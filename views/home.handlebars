@@ -1,0 +1,76 @@
+<div
+  class="container is-max-desktop mt-5"
+  style="background-color: #e9ecef; padding: 25px;border-radius: 15px;"
+>
+  <h4 class="title is-4 has-text-link">Ingrese Producto</h4>
+  <div class="field">
+    <label class="label">Nombre</label>
+    <div class="control">
+      <input class="input" type="text" placeholder="Nombre" id="nameProduct" />
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Precio</label>
+    <div class="control">
+      <input
+        class="input"
+        type="number"
+        placeholder="Precio"
+        id="priceProduct"
+      />
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Foto URL</label>
+    <div class="control">
+      <input
+        class="input"
+        type="text"
+        placeholder="Foto Url"
+        id="imageProduct"
+      />
+    </div>
+  </div>
+  <button class="button is-link" id="buttonProduct">Enviar</button>
+
+  <table class="table is-fullwidth" style="margin-top: 25px;">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Foto</th>
+      </tr>
+    </thead>
+    <tbody id="table-data">
+
+    </tbody>
+  </table>
+</div>
+
+<div
+  class="container is-max-desktop"
+  style="background-color: #e9ecef; padding: 25px;border-radius: 15px;margin-top: 25px;"
+>
+  <h4 class="title is-4 has-text-link">Centro de mensajes</h4>
+
+  <input class="input is-primary" id="email" type="email" placeholder="Email" />
+  <hr style="border-top: 1px solid #ccc;" />
+  <div id="chat"></div>
+
+  {{! <input type="text" id="message" placeholder="Message" />
+  <button type="button" id="submit">Send</button> }}
+
+  <div class="field is-grouped mt-2">
+
+    <p class="control is-expanded">
+      <input class="input" id="message" type="email" placeholder="Email" />
+    </p>
+    <p class="control">
+      <a type="button" class="button is-info" id="submit">
+        Enviar Mensaje
+      </a>
+    </p>
+
+  </div>
+
+</div>
