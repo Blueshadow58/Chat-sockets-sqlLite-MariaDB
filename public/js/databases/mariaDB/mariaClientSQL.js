@@ -20,17 +20,13 @@ class ClienteSQL {
 
   consultarById = (id) => {};
 
-  insertar = (data) => {
-    // this.knex.schema.hasTable("products").then((boolean) => {
-    //   return boolean;
-    // });
-    // if (this.knex.schema.hasTable("products")) {
-    //   return this.knex(`products`).insert(data);
-    // } else {
-    //   this.crearTabla().then(() => {
-    //     return this.knex(`products`).insert(data);
-    //   });
-    // }
+  insertar = async (data) => {
+    if (this.knex.schema.hasTable("products")) {
+      console.log(data);
+      await this.knex(`products`).insert(data);
+    } else {
+      this.crearTabla();
+    }
   };
 
   eliminar = (id) => {};

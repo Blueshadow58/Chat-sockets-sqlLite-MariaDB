@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 });
 import fs from "fs";
 const messages = [];
-const products = [];
+
 //READ MESSAGES
 
 fs.promises
@@ -27,10 +27,6 @@ fs.promises
     array.map((message) => {
       messages.push(message);
     });
-    // console.log(`Todos los items`);
-
-    //  console.log(JSON.parse(fileData));
-    // return (messages = JSON.parse(fileData));
   })
   .catch((err) => console.log(err));
 
@@ -44,10 +40,18 @@ const save = (messages) => {
     .catch((error) => console.log(error));
 };
 
-io.on("connection", (socket) => {
+const getProducts = async () => {
+  try {
+    const data = await cSql.consultar();
+
+    return data;
+  } catch (error) {}
+};
+
+io.on("connection", async (socket) => {
   console.log("Nuevo cliente conectado");
   socket.emit("new-chat-message", messages);
-  socket.emit("new-product-table", products);
+  socket.emit("new-product-table", await getProducts());
 
   socket.on("new-message", (message) => {
     messages.push(message);
@@ -58,24 +62,18 @@ io.on("connection", (socket) => {
   });
 
   socket.on("new-product", async (product) => {
-    cSql
-      .crearTabla()
-      .then(() => {
-        console.log("base de datos creada");
-      })
-      .catch((err) => console.log(err));
+    try {
+      await cSql.insertar(product);
+    } catch (error) {}
 
-    // const productsData = await cSql.insertar(product);
+    // cSql
+    //   .crearTabla()
+    //   .then(() => {
+    //     console.log("base de datos creada");
+    //   })
+    //   .catch((err) => console.log(err));
 
-    // let productsData;
-    // try {
-    //   const productsData = await cSql.consultar();
-    //   productsData;
-    // } catch (error) {}
-    // console.log(productsData);
-    const productsData = "asdas";
-
-    io.sockets.emit("new-product-table", productsData);
+    io.sockets.emit("new-product-table", await getProducts());
   });
 });
 

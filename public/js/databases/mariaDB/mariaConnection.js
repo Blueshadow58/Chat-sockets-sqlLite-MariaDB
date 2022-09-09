@@ -7,9 +7,9 @@ const options = {
   client: "mysql",
   connection: {
     host: "localhost",
-    port: 3350,
+    port: 3050,
     user: "root",
-    password: "root",
+    password: "",
     database: "product",
   },
 };
