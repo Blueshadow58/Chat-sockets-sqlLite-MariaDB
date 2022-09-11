@@ -6,7 +6,7 @@ class ClienteSQLite3 {
   }
 
   crearTabla = async () => {
-    return await this.knex.schema.createTable("messages", (table) => {
+    await this.knex.schema.createTable("messages", (table) => {
       table.increments("id").primary();
       table.string("email", 35).notNullable();
       table.integer("message", 35).notNullable();
@@ -15,10 +15,11 @@ class ClienteSQLite3 {
 
   consultar = async () => {
     try {
-      if (!this.knex.schema.hasTable("messages")) {
-        this.crearTabla();
+      if (await this.knex.schema.hasTable("messages")) {
+        return await this.knex.select().from("messages");
+      } else {
+        await this.crearTabla();
       }
-      return await this.knex.select().from("messages");
     } catch (error) {
       console.log(error);
     }

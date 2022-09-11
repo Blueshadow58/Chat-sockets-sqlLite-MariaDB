@@ -3,7 +3,7 @@ import ClienteSQLite3 from "./sqlite3Client.js";
 const options = {
   client: "sqlite3",
   connection: {
-    filename: `./database.sqlite3`,
+    filename: `./public/js/databases/sqlLite/DB/database.sqlite3`,
   },
   useNullAsDefault: false,
 };
