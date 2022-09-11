@@ -28,7 +28,7 @@ productSocket.on("new-product-table", (products) => {
           <img
           width="50px"
             src="${product.image}"
-            title="2016–17 UEFA Champions League"
+            alt="img no not found"
           ></img></td>
       </tr>`;
       return contentProduct;

@@ -5,8 +5,8 @@ class ClienteSQL {
     this.knex = knexLib(config);
   }
 
-  crearTabla = () => {
-    return this.knex.schema.createTable("products", (table) => {
+  crearTabla = async () => {
+    return await this.knex.schema.createTable("products", (table) => {
       table.increments("id").primary();
       table.string("name", 50).notNullable();
       table.integer("price", 25).notNullable();
@@ -15,17 +15,23 @@ class ClienteSQL {
   };
 
   consultar = async () => {
-    return await this.knex.select().from("products");
+    try {
+      if (!this.knex.schema.hasTable("products")) {
+        this.crearTabla();
+      }
+      return await this.knex.select().from("products");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   consultarById = (id) => {};
 
   insertar = async (data) => {
-    if (this.knex.schema.hasTable("products")) {
-      console.log(data);
+    try {
       await this.knex(`products`).insert(data);
-    } else {
-      this.crearTabla();
+    } catch (error) {
+      console.log(error);
     }
   };
 

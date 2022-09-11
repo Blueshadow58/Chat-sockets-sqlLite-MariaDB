@@ -9,7 +9,7 @@ const options = {
     host: "localhost",
     port: 3050,
     user: "root",
-    password: "",
+    password: "root",
     database: "product",
   },
 };
